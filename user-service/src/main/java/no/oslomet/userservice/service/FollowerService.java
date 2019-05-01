@@ -1,6 +1,6 @@
 package no.oslomet.userservice.service;
 
-import no.oslomet.userservice.model.Follower;
+/*import no.oslomet.userservice.model.Follower;
 import no.oslomet.userservice.repository.FollowerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +28,4 @@ public class FollowerService {
     public void deleteFollowerById(long id){
         followerRepository.deleteById(id);
     }
-}
+}*/

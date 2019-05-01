@@ -1,5 +1,5 @@
 package no.oslomet.userservice.service;
-
+/*
 import no.oslomet.userservice.model.Following;
 import no.oslomet.userservice.repository.FollowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +27,4 @@ public class FollowingService {
     public void deleteFollowingById(long id){
         followingRepository.deleteById(id);
     }
-}
+}*/

@@ -27,9 +27,7 @@ public class UserServiceApplication implements CommandLineRunner {
 
     @Override
     public void run(String...args) throws Exception {
-        roleRepository.save(new Role("User"));
-        roleRepository.save(new Role("Admin"));
-        //userRepository.save(new User("Natcha", "Nan", "nan@os.no", "natcha", "natcha", ));
-
+        //roleRepository.save(new Role("User"));
+        //roleRepository.save(new Role("Admin"));
     }
 }

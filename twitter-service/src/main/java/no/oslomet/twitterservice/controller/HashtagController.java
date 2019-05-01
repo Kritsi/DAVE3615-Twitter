@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.web.bind.annotation.RestController
 public class HashtagController {
@@ -20,6 +21,11 @@ public class HashtagController {
     @GetMapping("/hashtags/{id}")
     public Hashtag getHashtagById(@PathVariable long id) {
         return hashtagService.getBuldingById(id);
+    }
+
+    @GetMapping("/hashtags/name/{name}")
+    public Optional<Hashtag> getHashtagByHashtagName(@PathVariable String name) {
+        return hashtagService.findHashtagByName(name);
     }
 
     @DeleteMapping("/hashtags/{id}")

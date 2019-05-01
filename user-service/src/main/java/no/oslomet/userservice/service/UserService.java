@@ -17,6 +17,7 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -28,8 +29,21 @@ public class UserService implements UserDetailsService {
         return userRepository.findById(id).get();
     }
 
+    public Optional<User> getUserByUserName(String name) {
+        return userRepository.findUserByUserName(name);
+    }
+
     public User saveUser(User newUser)
     {
+        Optional<User> getUser = userRepository.findById(newUser.getId());
+
+        if(getUser.isPresent()) {
+            User user = getUser.get();
+            if(!user.getPassword().equals(newUser.getPassword())) {
+                newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+            }
+            return userRepository.save((newUser));
+        }
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         return userRepository.save(newUser);
     }
@@ -48,6 +62,6 @@ public class UserService implements UserDetailsService {
     private UserDetails getUserDetails(User user){
         return org.springframework.security.core.userdetails.User.withUsername(user.getUserName())
                 .password(user.getPassword())
-                .roles(user.getRoleId().getRoleName()).build();
+                .roles(user.getRole().getRoleName()).build();
     }
 }

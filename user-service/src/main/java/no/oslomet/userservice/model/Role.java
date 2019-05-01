@@ -1,8 +1,6 @@
 package no.oslomet.userservice.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,8 +15,9 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String roleName;
-    @OneToMany(mappedBy = "roleId")
-    private List<User> userList;
+    @Getter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "role")
+    private List<User> users;
 
 
     public Role (String roleName){

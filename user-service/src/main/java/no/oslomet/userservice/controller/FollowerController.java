@@ -1,6 +1,6 @@
 package no.oslomet.userservice.controller;
 
-import no.oslomet.userservice.model.Follower;
+/*import no.oslomet.userservice.model.Follower;
 import no.oslomet.userservice.service.FollowerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ public class FollowerController {
 
     @PutMapping("/followers/{id}")
     public Follower updateFollower(@PathVariable long id, @RequestBody Follower newFollower){
-        newFollower.setId(id);
+        //newFollower.setId(id);
         return followerService.saveFollower(newFollower);
     }
-}
+}*/

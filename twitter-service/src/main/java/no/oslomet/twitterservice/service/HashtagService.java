@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HashtagService {
@@ -18,6 +19,10 @@ public class HashtagService {
 
     public Hashtag getBuldingById(long id) {
         return hashtagRepository.findById(id).get();
+    }
+
+    public Optional<Hashtag> findHashtagByName(String name) {
+        return hashtagRepository.findHashtagsByName(name);
     }
 
     public Hashtag saveBulding(Hashtag hashtag) {

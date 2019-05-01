@@ -1,21 +1,20 @@
 package no.oslomet.userservice.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+/*@Entity
 @Data
 @NoArgsConstructor
-@ToString
+@ToString*/
 public class Following {
 
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @Getter(AccessLevel.NONE)
     @ManyToOne
-    private User user;
+    private User user;*/
 
 }

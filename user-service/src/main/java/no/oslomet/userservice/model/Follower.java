@@ -1,20 +1,26 @@
 package no.oslomet.userservice.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+/*@Entity
 @Data
 @NoArgsConstructor
-@ToString
+@ToString*/
 public class Follower{
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+
+    @Getter(AccessLevel.NONE)
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @Getter(AccessLevel.NONE)
+    @ManyToOne(targetEntity = User.class)
+    @JoinColumn(name = "follower_id")
+    private User follower;*/
 
 }
