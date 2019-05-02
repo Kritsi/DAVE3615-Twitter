@@ -39,7 +39,13 @@ public class MainController {
     private HttpServletRequest request;
 
     @GetMapping({"/", "/login"})
-    public String home() {
+    public String home(Model model) {
+        List<Tweet> allTweets = tweetService.getAllTweets();
+        List<Tweet> visibleTweets = tweetService.getVisibleTweets(allTweets);
+        visibleTweets.sort(Comparator.comparing(o -> o.getDate()));
+        Collections.reverse(visibleTweets);
+        model.addAttribute("tweets", visibleTweets);
+
         return "login";
     }
 

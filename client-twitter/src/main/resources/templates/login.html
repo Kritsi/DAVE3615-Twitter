@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     <title>Login</title>
 </head>
 <body>
 
-<div class="container">
-    <div class="col-sm-6 my-3 ">
+<div class="container" style="width: 580px">
+    <div class="space"></div>
+    <h1 class="text-primary" style="text-align: center">Twitter</h1>
+    <div class="mb-3">
         <form th:action="@{/login}" method="POST">
 
             <div class="form-group">
@@ -25,6 +28,27 @@
         </form>
 
         <a class="btn btn-link my-2" th:href="@{/signup}">Create a new account </a>
+    </div>
+
+    <div th:if="${!tweets.empty}">
+        <div th:each="tweet : ${tweets}">
+            <div class="card mx-auto mb-3" id="myCard" style="width:550px">
+                <div class="card-body">
+                    <a th:each="xUser : ${users}">
+                        <div th:if="${xUser.id} == ${tweet.userId}" id="myCardHeader">
+                            <a class="card-link" id="tweetOwner" th:text="${xUser.userName}"
+                               th:href="@{/showProfile/}+${tweet.userId}"></a>
+                        </div>
+                    </a>
+
+                    <p class="tweetDate" th:text="${tweet.date}"></p>
+                    <p class="card-text" th:text="${tweet.text}"></p>
+                    <a th:if="${tweet.image != ''}">
+                        <img class="card-img-bottom" width="500" th:src="@{'/images/' + ${tweet.image}}">
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

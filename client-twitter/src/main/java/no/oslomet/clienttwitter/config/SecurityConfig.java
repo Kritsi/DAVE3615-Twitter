@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/", "/signup", "/h2-console/**", "/processRegistration", "/style.css").permitAll()
+                .antMatchers("/", "/signup", "/h2-console/**", "/processRegistration", "/style.css", "/images/**").permitAll()
                 .antMatchers("/admin").hasRole("Admin")
                 .anyRequest().authenticated()
                 .and()
