@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js"
+            integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>Title</title>
+</head>
+<body>
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" id="myNavbar">
+    <a class="navbar-brand" href="#" style="color: #007bff;">Twitter <i class="fab fa-twitter"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/home"> Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/showAllTweets">All tweets</a>
+            </li>
+            <li>
+                <a class="nav-link" href="/myProfile">My profile</a>
+            </li>
+            <form class="form-inline" th:action="@{/tweetMatch}">
+                <input class="form-control mr-sm-2" name="searchInput" type="search" placeholder="Search for tweet / hashtag"
+                       aria-label="Search">
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <a th:if="${me.role.id} == 2" class="nav-link" href="/admin">Admin</a>
+            <a class="nav-link" href="/settings">Settings</a>
+            <i class="fa fa-user"></i> <label th:text="${me.firstName}"> </label>
+            <a class="btn btn-outline-secondary my-2 my-sm-0 mx-5"
+               type="submit"
+               th:href="@{/logout}">Logout</a>
+        </form>
+    </div>
+</nav>
+<div class="space"></div>
+
+<div class="container" style="width: 580px">
+    <h1 class="text-primary mt-3 mb-2" th:text="${user.userName}"></h1>
+    <div>
+        <div class="followBox d-inline-block">
+            <a>Followers</a>
+            <br/>
+            <a class="nbrFollow" th:href="@{/followers/}+${user.id}" th:text="${followerNbr}"></a>
+        </div>
+        <div class="followBox d-inline-block">
+            <a>Following</a>
+            <br/>
+            <a class="nbrFollow" th:href="@{/following/}+${user.id}" th:text="${followingNbr}"></a>
+        </div>
+        <a th:if="${follow} == false and ${user.id} != ${me.id}" class="btn btn-primary float-right" id="followBtn" th:href="@{/follow/}+${user.id}">
+            Follow <i class="fas fa-user-plus"></i>
+        </a>
+        <a th:if="${follow} == true" class="btn btn-outline-primary float-right" th:href="@{/removeFollow/}+${user.id}">
+            Unfollow
+            <i class="fas fa-user-times"></i></a>
+
+    </div>
+
+    <div class="card mt-1 mb-3">
+        <div class="card-header">
+            <a class="card-title">Register New Tweet </a>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/saveTweet}" modelAttribute="tweet" method="post" enctype="multipart/form-data">
+                <input type="hidden" th:value="${tweet.id}" name="id">
+                <div class="form-group">
+                    <input type="text" th:value="${tweet.text}" name="text" class="form-control" placeholder="Tweet text" required maxlength="140">
+                </div>
+                <button class="btn btn-primary float-right">Publish <i class="fab fa-twitter"></i></button>
+                <div class="form-group">
+                    <input type="file" name="imageFile" accept="image/png, image/jpeg">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div th:if="${!tweets.empty}">
+        <div th:each="tweet : ${tweets}">
+            <div class="card mx-auto mb-3" id="myCard" style="width:550px">
+                <div class="card-body">
+                    <a class="btn btn-primary float-right" id="myRetweet" th:href="@{/retweetTweet/}+${tweet.id}">
+                        Retweet <i class="fas fa-retweet"></i>
+                    </a>
+                    <a th:each="xUser : ${users}">
+                        <div th:if="${xUser.id} == ${tweet.userId}" id="myCardHeader">
+                            <a class="card-link" id="tweetOwner" th:text="${xUser.userName}"
+                               th:href="@{/showProfile/}+${tweet.userId}"></a>
+                        </div>
+                    </a>
+
+                    <p class="tweetDate" th:text="${tweet.date}"></p>
+                    <p class="card-text" th:text="${tweet.text}"></p>
+                    <a th:if="${tweet.image != ''}">
+                        <img class="card-img-bottom" width="500" th:src="@{'/images/' + ${tweet.image}}">
+                    </a>
+                    <a th:if="${tweet.visible == true}" class="btn btn-outline-secondary mt-1 float-right" style="font-size: 12px" th:href="@{'/makePrivate/' + ${tweet.id}}">
+                        Make private
+                    </a>
+                    <a th:if="${tweet.visible == false}" class="btn btn-outline-secondary mt-1 float-right" style="font-size: 12px" th:href="@{'/makePublic/' + ${tweet.id}}">
+                        Make public
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

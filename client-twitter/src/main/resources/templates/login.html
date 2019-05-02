@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-sm-6 my-3 ">
+        <form th:action="@{/login}" method="POST">
+
+            <div class="form-group">
+                <input type="text" name="username" class="form-control" placeholder="userName">
+            </div>
+            <div class="form-group">
+                <input type="password" name="password" class="form-control" placeholder="password">
+            </div>
+
+            <button class="btn btn-success" type="submit">Login</button>
+
+        </form>
+
+        <a class="btn btn-link my-2" th:href="@{/signup}">Create a new account </a>
+    </div>
+</div>
+
+
+</body>
+</html>

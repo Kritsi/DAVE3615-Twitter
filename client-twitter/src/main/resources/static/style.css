@@ -1,0 +1,58 @@
+body #myNavbar {
+    background-color: #fff;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.space {
+    height: 60px;
+}
+
+.followBox {
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid lightskyblue;
+    margin: 5px 10px 5px 0;
+    padding: 5px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.nbrFollow {
+    font-size: 18px;
+}
+
+.tweetDate {
+    font-size: 10px;
+    color: gray;
+}
+
+#myCard {
+    border-color: #cfddfd;
+    /*border-color: #ffe1ee;*/
+}
+
+#myCardHeader {
+    background-color: #fff;
+}
+
+#tweetOwner {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+body a#tweetOwner {
+    color: #759fff;
+    /*color: #ff8282;*/
+}
+
+#myRetweet {
+    font-size: 14px;
+}
+
+#followBtn {
+    /*text-align: center;
+    background-color: lightskyblue;
+    padding: 5px;
+    border-radius: 5px;*/
+    margin: 5px;
+}

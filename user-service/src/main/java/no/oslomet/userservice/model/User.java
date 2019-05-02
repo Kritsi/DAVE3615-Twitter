@@ -36,12 +36,6 @@ public class User {
             joinColumns = { @JoinColumn(name = "user_id") },
             inverseJoinColumns = { @JoinColumn(name = "follower_id")})
     List<User> followers = new ArrayList<>();
-    /*@OneToMany(mappedBy = "user")
-    private List<Follower> following;
-    @OneToMany(mappedBy = "follower")
-    private List<Follower> followers;*/
-    /*@OneToMany(mappedBy = "user")
-    private List<Following> followingList;*/
 
     @Override
     public String toString() {
