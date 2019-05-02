@@ -36,8 +36,7 @@
                 <div class="card-body">
                     <a th:each="xUser : ${users}">
                         <div th:if="${xUser.id} == ${tweet.userId}" id="myCardHeader">
-                            <a class="card-link" id="tweetOwner" th:text="${xUser.userName}"
-                               th:href="@{/showProfile/}+${tweet.userId}"></a>
+                            <a class="card-link" id="tweetOwner" th:text="${xUser.userName}"></a>
                         </div>
                     </a>
 

@@ -45,6 +45,7 @@ public class MainController {
         visibleTweets.sort(Comparator.comparing(o -> o.getDate()));
         Collections.reverse(visibleTweets);
         model.addAttribute("tweets", visibleTweets);
+        model.addAttribute("users", userService.getAllUsers());
 
         return "login";
     }
