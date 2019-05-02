@@ -9,10 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import sun.applet.Main;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -148,10 +152,13 @@ public class MainController {
     @PostMapping("/saveTweet")
     public String saveTweet(@ModelAttribute("Tweet") Tweet tweet, Model model,
                             @RequestParam("imageFile") MultipartFile imageFile) {
-        String path = "C:\\Users\\krist\\IdeaProjects\\client-twitter\\src\\main\\resources\\static\\images\\" + imageFile.getOriginalFilename();
+        URL url = this.getClass().getClassLoader().getResource("static/images");
+        System.out.println("url: " + url);
         try {
-            imageFile.transferTo(new File(path));
+            imageFile.transferTo(new File(url.toURI() + "/" + imageFile.getOriginalFilename()));
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         tweet.setImage(imageFile.getOriginalFilename());
