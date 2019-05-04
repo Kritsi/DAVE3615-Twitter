@@ -39,6 +39,8 @@ public class UserService implements UserDetailsService {
 
         if(getUser.isPresent()) {
             User user = getUser.get();
+            newUser.setFollowers(user.getFollowers());
+            newUser.setFollowing(user.getFollowing());
             if(!user.getPassword().equals(newUser.getPassword())) {
                 newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
             }
